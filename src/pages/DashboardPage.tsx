@@ -849,13 +849,13 @@ function GlowCard({ label, value, unit, icon: Icon, color, trend, sub }: {
   icon: any; color: string; trend?: 'up' | 'down'; sub?: string;
 }) {
   const cm: Record<string, { bg: string; border: string; txt: string }> = {
-    red:    { bg: 'from-red-500/15 via-red-950/20 to-black/40',    border: 'border-red-500/30',    txt: 'text-red-400' },
-    blue:   { bg: 'from-blue-500/15 via-blue-950/20 to-black/40',  border: 'border-blue-500/30',   txt: 'text-blue-400' },
-    cyan:   { bg: 'from-cyan-500/15 via-cyan-950/20 to-black/40',  border: 'border-cyan-500/30',   txt: 'text-cyan-400' },
+    red: { bg: 'from-red-500/15 via-red-950/20 to-black/40', border: 'border-red-500/30', txt: 'text-red-400' },
+    blue: { bg: 'from-blue-500/15 via-blue-950/20 to-black/40', border: 'border-blue-500/30', txt: 'text-blue-400' },
+    cyan: { bg: 'from-cyan-500/15 via-cyan-950/20 to-black/40', border: 'border-cyan-500/30', txt: 'text-cyan-400' },
     purple: { bg: 'from-purple-500/15 via-purple-950/20 to-black/40', border: 'border-purple-500/30', txt: 'text-purple-400' },
-    teal:   { bg: 'from-teal-500/15 via-teal-950/20 to-black/40',  border: 'border-teal-500/30',   txt: 'text-teal-400' },
+    teal: { bg: 'from-teal-500/15 via-teal-950/20 to-black/40', border: 'border-teal-500/30', txt: 'text-teal-400' },
     orange: { bg: 'from-orange-500/15 via-orange-950/20 to-black/40', border: 'border-orange-500/30', txt: 'text-orange-400' },
-    green:  { bg: 'from-green-500/15 via-green-950/20 to-black/40', border: 'border-green-500/30', txt: 'text-green-400' },
+    green: { bg: 'from-green-500/15 via-green-950/20 to-black/40', border: 'border-green-500/30', txt: 'text-green-400' },
   };
   const c = cm[color] ?? cm.cyan;
   return (
@@ -926,11 +926,11 @@ export default function DashboardPage() {
     return DEPTH_LEVELS.map((d) => {
       const tempAtDepth =
         d <= 10 ? 29.2 :
-        d <= 50 ? 28.5 :
-        d <= 100 ? 24.1 :
-        d <= 200 ? 17.8 :
-        d <= 500 ? 11.2 :
-        d <= 800 ? 6.8 : 4.6;
+          d <= 50 ? 28.5 :
+            d <= 100 ? 24.1 :
+              d <= 200 ? 17.8 :
+                d <= 500 ? 11.2 :
+                  d <= 800 ? 6.8 : 4.6;
       const salinity = d <= 50 ? 35.1 : 34.8;
       const c = calculateSoundSpeed(tempAtDepth, salinity, d);
       return { depth: d, speed: c, temp: tempAtDepth };
@@ -995,11 +995,10 @@ export default function DashboardPage() {
             <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-xl border border-white/10 light-suite-pills">
               <button
                 onClick={() => setDashboardView('twin')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  dashboardView === 'twin'
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${dashboardView === 'twin'
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
                     : 'text-white/60 hover:text-white hover:bg-white/5 light-suite-pill-inactive'
-                }`}
+                  }`}
               >
                 <Waves size={13} />
                 <span>Ocean Twin &amp; Strata</span>
@@ -1010,11 +1009,10 @@ export default function DashboardPage() {
 
               <button
                 onClick={() => setDashboardView('simulations')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  dashboardView === 'simulations'
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${dashboardView === 'simulations'
                     ? 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow-lg shadow-teal-500/25'
                     : 'text-white/60 hover:text-white hover:bg-white/5 light-suite-pill-inactive'
-                }`}
+                  }`}
               >
                 <Activity size={13} />
                 <span>Physics Simulations</span>
@@ -1025,11 +1023,10 @@ export default function DashboardPage() {
 
               <button
                 onClick={() => setDashboardView('telemetry')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  dashboardView === 'telemetry'
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${dashboardView === 'telemetry'
                     ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25'
                     : 'text-white/60 hover:text-white hover:bg-white/5 light-suite-pill-inactive'
-                }`}
+                  }`}
               >
                 <LayoutDashboard size={13} />
                 <span>Live Telemetry &amp; Alerts</span>
@@ -1368,10 +1365,10 @@ export default function DashboardPage() {
                                 n < 0.25
                                   ? '#1e40af'
                                   : n < 0.5
-                                  ? '#06b6d4'
-                                  : n < 0.75
-                                  ? '#fbbf24'
-                                  : '#ef4444';
+                                    ? '#06b6d4'
+                                    : n < 0.75
+                                      ? '#fbbf24'
+                                      : '#ef4444';
 
                               return (
                                 <div
@@ -1723,11 +1720,10 @@ export default function DashboardPage() {
                   {soundSpeedProfile.slice(0, 6).map((item) => (
                     <div
                       key={item.depth}
-                      className={`flex items-center justify-between p-2 rounded-xl text-xs ${
-                        item.depth === sofarAxis.depth
+                      className={`flex items-center justify-between p-2 rounded-xl text-xs ${item.depth === sofarAxis.depth
                           ? 'bg-cyan-500/15 border border-cyan-500/30 font-bold text-cyan-300'
                           : 'bg-white/5 text-white/70'
-                      }`}
+                        }`}
                     >
                       <span className="font-mono">{item.depth}m Depth</span>
                       <span className="font-mono">{item.temp.toFixed(1)}°C</span>

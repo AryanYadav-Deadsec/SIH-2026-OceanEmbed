@@ -1956,3 +1956,16 @@ html.light .theme-toggle-mobile:hover {
   border-color: rgba(14, 165, 233, 0.55) !important;
   color: #0284c7 !important;
 }
+
+/* ============================================================
+   GOVERNMENT HEADER BANNER THEME ADAPTATION
+============================================================ */
+
+html.light .gov-header-bar {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(14, 165, 233, 0.20) !important;
+  box-shadow: 0 2px 12px rgba(14, 116, 144, 0.08) !important;
+  color: #475569 !important;
+}
