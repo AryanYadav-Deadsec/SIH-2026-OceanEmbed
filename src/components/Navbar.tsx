@@ -153,16 +153,33 @@ export default function Navbar() {
 
             {/* Theme Toggle Button */}
             <button
+              type="button"
               onClick={toggleTheme}
-              aria-label="Toggle Light and Dark Theme"
-              title={theme === 'dark' ? 'Switch to Sunlit Ocean (Light Mode)' : 'Switch to Deep Abyss Ocean (Dark Mode)'}
-              className="w-10 h-10 rounded-xl btn-glass flex items-center justify-center cursor-pointer shadow-md"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleTheme();
+                }
+              }}
+              aria-label="Toggle theme"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              className="no-3d theme-toggle-btn group relative flex items-center justify-center shrink-0 cursor-pointer"
             >
-              {theme === 'dark' ? (
-                <Sun size={18} className="text-amber-400 hover:rotate-90 transition-transform duration-300" />
-              ) : (
-                <Moon size={18} className="text-cyan-600 hover:-rotate-45 transition-transform duration-300" />
-              )}
+              <div key={theme} className="theme-toggle-icon-wrap flex items-center justify-center">
+                {theme === 'dark' ? (
+                  <Moon
+                    size={20}
+                    strokeWidth={2}
+                    className="theme-toggle-icon theme-toggle-moon"
+                  />
+                ) : (
+                  <Sun
+                    size={20}
+                    strokeWidth={2}
+                    className="theme-toggle-icon theme-toggle-sun"
+                  />
+                )}
+              </div>
             </button>
 
             {isAuthenticated ? (
@@ -285,18 +302,20 @@ export default function Navbar() {
             <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/10">
               <span className="text-xs font-mono text-white/50">Theme Settings</span>
               <button
+                type="button"
                 onClick={toggleTheme}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-lg glass text-xs font-medium text-white/80 hover:text-white transition-all"
+                aria-label="Toggle theme"
+                className="no-3d theme-toggle-mobile flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium cursor-pointer transition-all"
               >
                 {theme === 'dark' ? (
                   <>
-                    <Sun size={14} className="text-amber-400" />
-                    <span>Switch to Light</span>
+                    <Moon size={14} strokeWidth={2} className="theme-toggle-moon text-[#E2E8F0]" />
+                    <span>Dark Mode</span>
                   </>
                 ) : (
                   <>
-                    <Moon size={14} className="text-cyan-600" />
-                    <span>Switch to Dark</span>
+                    <Sun size={14} strokeWidth={2} className="theme-toggle-sun text-[#0EA5E9]" />
+                    <span>Light Mode</span>
                   </>
                 )}
               </button>
