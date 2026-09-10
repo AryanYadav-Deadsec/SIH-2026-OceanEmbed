@@ -1,0 +1,1802 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: #020917;
+    color: #e2e8f0;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(6, 182, 212, 0.4);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.7);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+  }
+
+  .glass:hover {
+    border-color: rgba(6, 182, 212, 0.40);
+    box-shadow:
+      0 16px 42px 0 rgba(0, 0, 0, 0.45),
+      0 0 20px rgba(6, 182, 212, 0.18),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.30);
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+      0 14px 44px 0 rgba(0, 0, 0, 0.50),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.28),
+      inset 0 -1px 0 0 rgba(0, 0, 0, 0.20);
+  }
+
+  .glass-dark {
+    background: linear-gradient(135deg, rgba(2, 9, 23, 0.82) 0%, rgba(3, 14, 32, 0.70) 100%);
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.60),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  /* 3D card lift effect */
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-3d:hover {
+    transform: translateY(-4px) rotateX(2deg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(6,182,212,0.15);
+  }
+
+  /* Depth shadow layers */
+  .depth-shadow {
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 -1px 0 rgba(0,0,0,0.3) inset,
+      0 8px 32px rgba(0,0,0,0.4),
+      0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .depth-shadow-lg {
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.08) inset,
+      0 -2px 0 rgba(0,0,0,0.4) inset,
+      0 20px 60px rgba(0,0,0,0.5),
+      0 4px 16px rgba(0,0,0,0.4);
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3), 0 0 40px rgba(6, 182, 212, 0.1);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), 0 0 40px rgba(239, 68, 68, 0.15);
+  }
+
+  .gradient-ocean {
+    background: linear-gradient(135deg, #020917 0%, #0a1628 40%, #0c2040 70%, #041020 100%);
+  }
+
+  .gradient-text-cyan {
+    background: linear-gradient(90deg, #06b6d4, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-ocean {
+    background: linear-gradient(90deg, #06b6d4, #8b5cf6, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.fade-in-left {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Unified Platform Tokens */
+.page-container {
+  max-width: 80rem; /* max-w-7xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 1rem;
+  box-shadow:
+    0 10px 36px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow:
+    0 16px 44px rgba(0, 0, 0, 0.52),
+    0 0 25px rgba(6, 182, 212, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+/* ============================================================
+   UNIVERSAL 3D BUTTONS SYSTEM
+============================================================ */
+
+/* Base 3D physics for all buttons across the platform */
+button:not([disabled]):not(.no-3d),
+.btn,
+.btn-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.16s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* 3D Button Hover: Zoom & Pop Forward Focus */
+button:not([disabled]):not(.no-3d):hover,
+.btn:hover,
+.btn-3d:hover {
+  transform: translateY(-3px) scale(1.038) !important;
+  filter: brightness(1.08) drop-shadow(0 8px 22px rgba(6, 182, 212, 0.3));
+  z-index: 5;
+}
+
+/* 3D Button Active: Tactile Press Depression */
+button:not([disabled]):not(.no-3d):active,
+.btn:active,
+.btn-3d:active {
+  transform: translateY(2px) scale(0.985) !important;
+  filter: brightness(0.96);
+}
+
+/* 3D View Cards & Panels: Pointer Focus Zoom */
+.view-card,
+.glass-panel,
+.prism-card,
+.depth-card {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease;
+}
+
+.view-card:hover,
+.glass-panel:hover,
+.prism-card:hover,
+.depth-card:hover {
+  transform: translateY(-4px) scale(1.014);
+  border-color: rgba(6, 182, 212, 0.45);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(6, 182, 212, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  z-index: 2;
+}
+
+/* 3D Glass Button */
+.btn-glass,
+.btn-3d-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+.btn-glass:hover,
+.btn-3d-glass:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.07) 100%) !important;
+  border-color: rgba(6, 182, 212, 0.5) !important;
+  box-shadow:
+    0 5px 0 rgba(0, 0, 0, 0.55),
+    0 10px 22px rgba(6, 182, 212, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-glass:active,
+.btn-3d-glass:active {
+  transform: translateY(2px) !important;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 3D Cyan Primary Button */
+.btn-primary-cyan,
+.btn-3d-cyan,
+button[class*="from-cyan-500"]:not(.btn-glass) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, #06b6d4 0%, #0284c7 100%) !important;
+  border: 1px solid #38bdf8 !important;
+  color: #ffffff !important;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow:
+    0 4px 0 #0369a1,
+    0 8px 20px rgba(6, 182, 212, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.btn-primary-cyan:hover,
+.btn-3d-cyan:hover,
+button[class*="from-cyan-500"]:not(.btn-glass):hover {
+  background: linear-gradient(180deg, #22d3ee 0%, #0369a1 100%) !important;
+  transform: translateY(-2px);
+  border-color: #67e8f9 !important;
+  box-shadow:
+    0 6px 0 #0369a1,
+    0 12px 25px rgba(6, 182, 212, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.btn-primary-cyan:active,
+.btn-3d-cyan:active,
+button[class*="from-cyan-500"]:not(.btn-glass):active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 1px 0 #0369a1,
+    0 2px 6px rgba(6, 182, 212, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 3D Blue Action Buttons */
+.btn-3d-blue,
+button[class*="from-blue-600"],
+button[class*="bg-blue-600"] {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%) !important;
+  border: 1px solid #60a5fa !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 4px 0 #1e40af,
+    0 8px 20px rgba(37, 99, 235, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-3d-blue:hover,
+button[class*="from-blue-600"]:hover,
+button[class*="bg-blue-600"]:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 #1e40af,
+    0 12px 25px rgba(37, 99, 235, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+}
+
+.btn-3d-blue:active,
+button[class*="from-blue-600"]:active,
+button[class*="bg-blue-600"]:active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 1px 0 #1e40af,
+    0 2px 6px rgba(37, 99, 235, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 3D Red Alert / Danger Buttons */
+.btn-3d-red,
+button[class*="from-red-600"],
+button[class*="bg-red-600"],
+button[class*="bg-red-500"] {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%) !important;
+  border: 1px solid #f87171 !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 4px 0 #991b1b,
+    0 8px 20px rgba(239, 68, 68, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-3d-red:hover,
+button[class*="from-red-600"]:hover,
+button[class*="bg-red-600"]:hover,
+button[class*="bg-red-500"]:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 #991b1b,
+    0 12px 25px rgba(239, 68, 68, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+}
+
+.btn-3d-red:active,
+button[class*="from-red-600"]:active,
+button[class*="bg-red-600"]:active,
+button[class*="bg-red-500"]:active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 1px 0 #991b1b,
+    0 2px 6px rgba(239, 68, 68, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 3D Emerald / Success Buttons */
+.btn-3d-emerald,
+button[class*="from-emerald-600"],
+button[class*="bg-emerald-600"] {
+  background: linear-gradient(180deg, #10b981 0%, #059669 100%) !important;
+  border: 1px solid #34d399 !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 4px 0 #065f46,
+    0 8px 20px rgba(16, 185, 129, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-3d-emerald:hover,
+button[class*="from-emerald-600"]:hover,
+button[class*="bg-emerald-600"]:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 #065f46,
+    0 12px 25px rgba(16, 185, 129, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+}
+
+.btn-3d-emerald:active,
+button[class*="from-emerald-600"]:active,
+button[class*="bg-emerald-600"]:active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 1px 0 #065f46,
+    0 2px 6px rgba(16, 185, 129, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ============================================================
+   LIGHT THEME OVERRIDES (Sunlit Tropical Ocean)
+============================================================ */
+
+/* ============================================================
+   LIGHT THEME CSS TOKENS
+   Single source of truth — used across Home, Dashboard, InputData
+============================================================ */
+html.light {
+  /* Backgrounds */
+  --bg-primary:    #e8f4fd;
+  --bg-secondary:  #ddeefa;
+  --bg-card:       rgba(255, 255, 255, 0.75);
+  --bg-card-hover: rgba(255, 255, 255, 0.92);
+
+  /* Glass */
+  --glass-bg:     rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.55);
+  --glass-shadow: 0 8px 32px rgba(14, 116, 144, 0.10), inset 0 1px 0 rgba(255,255,255,0.95);
+
+  /* Accent */
+  --accent-cyan:   #0891b2;
+  --accent-blue:   #1d4ed8;
+  --accent-indigo: #4f46e5;
+
+  /* Text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #64748b;
+
+  /* Shadows */
+  --shadow-sm:  0 4px 16px rgba(14, 116, 144, 0.08);
+  --shadow-md:  0 10px 35px rgba(14, 116, 144, 0.12);
+  --shadow-lg:  0 20px 60px rgba(14, 116, 144, 0.16);
+}
+
+html.light body {
+  /* Premium ice-blue ocean gradient — matches Input Data page */
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%,   rgba(14, 165, 233, 0.14), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 10%,  rgba(56, 189, 248, 0.10), transparent 55%),
+    radial-gradient(ellipse 50% 35% at 50% 100%, rgba(99, 179, 237, 0.10), transparent 60%),
+    linear-gradient(180deg, #ddf2fc 0%, #e8f7ff 30%, #eef9ff 60%, #f0faff 100%);
+  color: #0f172a;
+  min-height: 100vh;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: rgba(14, 165, 233, 0.08);
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(14, 165, 233, 0.35);
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(14, 165, 233, 0.60);
+}
+
+/* Glass & Card Surfaces (Light Mode) */
+html.light .glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.68) 100%) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border: 1px solid rgba(14, 165, 233, 0.26) !important;
+  box-shadow:
+    0 10px 30px -4px rgba(14, 116, 144, 0.10),
+    0 0 1px 1px rgba(255, 255, 255, 0.90),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 0 rgba(14, 165, 233, 0.10) !important;
+}
+
+html.light .glass:hover {
+  border-color: rgba(14, 165, 233, 0.45) !important;
+  box-shadow:
+    0 16px 36px -4px rgba(14, 116, 144, 0.16),
+    0 0 20px rgba(14, 165, 233, 0.15),
+    inset 0 1px 0 0 #ffffff !important;
+}
+
+html.light .glass-strong {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.84) 100%) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border: 1px solid rgba(14, 165, 233, 0.32) !important;
+  box-shadow:
+    0 12px 38px rgba(14, 116, 144, 0.13),
+    inset 0 1px 0 0 #ffffff !important;
+}
+
+html.light .glass-dark {
+  background: linear-gradient(135deg, rgba(240, 249, 255, 0.95) 0%, rgba(224, 242, 254, 0.88) 100%) !important;
+  backdrop-filter: blur(22px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+  border: 1px solid rgba(14, 165, 233, 0.24) !important;
+  box-shadow: 0 4px 22px rgba(14, 116, 144, 0.10) !important;
+}
+
+html.light .glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.72) 100%) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border: 1px solid rgba(14, 165, 233, 0.25) !important;
+  border-radius: 1rem;
+  box-shadow:
+    0 10px 32px rgba(14, 116, 144, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 rgba(14, 165, 233, 0.10) !important;
+}
+
+html.light .card-3d:hover {
+  box-shadow: 0 20px 40px rgba(14, 116, 144, 0.16), 0 0 25px rgba(6, 182, 212, 0.22) !important;
+}
+
+html.light .depth-shadow {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 4px 20px rgba(14, 116, 144, 0.08);
+}
+
+html.light .depth-shadow-lg {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.98) inset,
+    0 12px 36px rgba(14, 116, 144, 0.12);
+}
+
+/* Light Mode 3D Buttons */
+html.light .btn-glass,
+html.light .btn-3d-glass {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%) !important;
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  color: #0f172a !important;
+  font-weight: 500;
+  box-shadow:
+    0 3px 0 rgba(14, 116, 144, 0.25),
+    0 6px 14px rgba(14, 116, 144, 0.09),
+    inset 0 1px 0 #ffffff !important;
+}
+
+html.light .btn-glass:hover,
+html.light .btn-3d-glass:hover {
+  transform: translateY(-2px);
+  background: #ffffff !important;
+  border-color: rgba(14, 165, 233, 0.60) !important;
+  color: #0284c7 !important;
+  box-shadow:
+    0 5px 0 rgba(14, 116, 144, 0.32),
+    0 10px 20px rgba(14, 116, 144, 0.16),
+    inset 0 1px 0 #ffffff !important;
+}
+
+html.light .btn-glass:active,
+html.light .btn-3d-glass:active {
+  transform: translateY(2px) !important;
+  box-shadow:
+    0 1px 0 rgba(14, 116, 144, 0.35),
+    0 2px 4px rgba(14, 116, 144, 0.10),
+    inset 0 2px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .btn-primary-cyan,
+html.light .btn-3d-cyan,
+html.light button[class*="from-cyan-500"]:not(.btn-glass) {
+  background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%) !important;
+  border: 1px solid #7dd3fc !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow:
+    0 4px 0 #0369a1,
+    0 8px 20px rgba(14, 165, 233, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.50) !important;
+}
+
+html.light .btn-primary-cyan:hover,
+html.light .btn-3d-cyan:hover,
+html.light button[class*="from-cyan-500"]:not(.btn-glass):hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #38bdf8 0%, #0369a1 100%) !important;
+  box-shadow:
+    0 6px 0 #0369a1,
+    0 12px 26px rgba(14, 165, 233, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.60) !important;
+}
+
+html.light .btn-primary-cyan:active,
+html.light .btn-3d-cyan:active,
+html.light button[class*="from-cyan-500"]:not(.btn-glass):active {
+  transform: translateY(3px) !important;
+  box-shadow:
+    0 1px 0 #0369a1,
+    0 2px 6px rgba(14, 116, 144, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.20) !important;
+}
+
+/* High Contrast Slate Text Overrides */
+html.light .text-white {
+  color: #0f172a;
+}
+html.light .text-white\/90 {
+  color: #0f172a;
+}
+html.light .text-white\/80 {
+  color: #1e293b;
+}
+html.light .text-white\/70 {
+  color: #334155;
+}
+html.light .text-white\/60 {
+  color: #475569;
+}
+html.light .text-white\/50 {
+  color: #64748b;
+}
+html.light .text-white\/40 {
+  color: #64748b;
+}
+html.light .text-white\/30 {
+  color: #94a3b8;
+}
+html.light .text-slate-400 {
+  color: #475569;
+}
+html.light .text-slate-300 {
+  color: #334155;
+}
+html.light .text-slate-200 {
+  color: #1e293b;
+}
+
+/* Maintain crisp white text inside solid colored badges, buttons and gradients */
+html.light .bg-gradient-to-r.text-white,
+html.light .bg-gradient-to-br.text-white,
+html.light .bg-gradient-to-r .text-white,
+html.light .bg-gradient-to-br .text-white,
+html.light button.bg-cyan-500,
+html.light button.bg-blue-600,
+html.light button.bg-emerald-600,
+html.light button.bg-red-600,
+html.light a.bg-cyan-500,
+html.light a.bg-blue-600,
+html.light a.bg-emerald-600,
+html.light [class*="from-cyan-500"] .text-white,
+html.light [class*="from-blue-600"] .text-white,
+html.light [class*="bg-cyan-600"] .text-white,
+html.light [class*="bg-blue-600"] .text-white,
+html.light [class*="bg-red-600"] .text-white,
+html.light [class*="bg-emerald-600"] .text-white,
+html.light .btn-primary,
+html.light .keep-white {
+  color: #ffffff !important;
+}
+
+/* Subtle border & backgrounds */
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/12,
+html.light .border-white\/15 {
+  border-color: rgba(14, 165, 233, 0.18);
+}
+
+html.light .border-white\/20,
+html.light .border-white\/25,
+html.light .border-white\/30 {
+  border-color: rgba(14, 165, 233, 0.30);
+}
+
+html.light .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.65);
+}
+
+html.light .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+html.light .bg-white\/15 {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+html.light .hover\:bg-white\/5:hover {
+  background-color: rgba(14, 165, 233, 0.08);
+}
+
+html.light .hover\:bg-white\/10:hover {
+  background-color: rgba(14, 165, 233, 0.14);
+}
+
+html.light .bg-black\/20,
+html.light .bg-black\/30,
+html.light .bg-black\/40,
+html.light .bg-black\/50 {
+  background-color: rgba(240, 249, 255, 0.65);
+}
+
+html.light .bg-\[\#020917\],
+html.light .bg-\[\#030d1e\],
+html.light .bg-\[\#020b16\],
+html.light .bg-\[\#040f1a\],
+html.light .bg-\[\#071228\],
+html.light .bg-\[\#01050e\],
+html.light .bg-\[\#010612\],
+html.light .bg-\[\#010613\],
+html.light .bg-\[\#010915\],
+html.light .bg-\[\#04162e\],
+html.light .bg-\[\#020d1c\] {
+  background-color: rgba(240, 249, 255, 0.82) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hero canvas container (dark bg behind 3D Earth) — keep it dark in light mode */
+html.light .bg-\[\#01050e\] canvas,
+html.light [class*="bg-\\[\#01"] canvas {
+  /* Three.js canvas — preserve dark space scene regardless of mode */
+  background: #01050e !important;
+}
+
+html.light .bg-grid {
+  background-image: 
+    linear-gradient(rgba(14, 165, 233, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.08) 1px, transparent 1px);
+}
+
+/* Form Controls in Light Mode */
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: rgba(255, 255, 255, 0.90) !important;
+  color: #0f172a !important;
+  border-color: rgba(14, 165, 233, 0.28) !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25) !important;
+}
+
+/* ─── Decorative underwater elements — softer in light mode ───────────────── */
+html.light .water-ray {
+  opacity: 0.35;
+}
+html.light .fish-swim {
+  opacity: 0.20;
+}
+html.light .water-bubble {
+  opacity: 0.18;
+}
+html.light .water-caustic {
+  opacity: 0.30;
+}
+
+/* ─── Navbar in light mode — frosted glass strip ──────────────────────────── */
+html.light nav,
+html.light header {
+  background: rgba(240, 249, 255, 0.82) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom-color: rgba(14, 165, 233, 0.20) !important;
+  box-shadow: 0 2px 20px rgba(14, 116, 144, 0.08) !important;
+}
+
+/* ─── Hero / stats metric cards ───────────────────────────────────────────── */
+html.light .bg-gradient-to-br.from-white\/\[0\.07\] {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border-color: rgba(14, 165, 233, 0.28) !important;
+  box-shadow: 0 10px 35px rgba(14, 116, 144, 0.09) !important;
+}
+
+/* ─── Hardcoded black/dark panel overrides ────────────────────────────────── */
+html.light .bg-black\/60,
+html.light .bg-black\/70,
+html.light .bg-black\/75,
+html.light .bg-black\/80 {
+  background-color: rgba(240, 249, 255, 0.82) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Bottom telemetry HUD on Earth scene — keep readable on dark canvas */
+html.light .bg-black\/80.backdrop-blur-xl {
+  background-color: rgba(10, 25, 50, 0.88) !important;
+}
+
+/* ─── Dashboard widget containers ─────────────────────────────────────────── */
+html.light .bg-white\/5.border {
+  background: rgba(255, 255, 255, 0.68) !important;
+  border-color: rgba(14, 165, 233, 0.22) !important;
+  box-shadow: 0 8px 28px rgba(14, 116, 144, 0.08) !important;
+}
+
+/* ─── Gradient text — brighter in light mode ──────────────────────────────── */
+html.light [style*="WebkitTextFillColor: transparent"],
+html.light [style*="-webkit-text-fill-color: transparent"] {
+  filter: brightness(0.80) saturate(1.3);
+}
+
+/* ─── radar-map-panel in light mode ───────────────────────────────────────── */
+html.light .radar-map-panel {
+  background: rgba(255, 255, 255, 0.80) !important;
+  border-color: rgba(14, 165, 233, 0.30) !important;
+  box-shadow: 0 16px 48px rgba(14, 116, 144, 0.12), 0 0 20px rgba(14, 165, 233, 0.10) !important;
+}
+
+/* ============================================================
+   LIGHT-MODE UTILITY CLASSES
+   Referenced by SatelliteReconstructionSimulation, HomePage,
+   DashboardPage, Navbar, PageLayout via className additions.
+   Dark mode: these classes are no-ops (dark theme uses existing
+   Tailwind dark: variants and hardcoded dark values).
+============================================================ */
+
+/* Page root — overrides bg-[#020917] on the outermost div */
+html.light .light-page-root {
+  background: transparent !important;
+  color: #0f172a !important;
+}
+
+/* Fixed water background layer — replace the dark ocean with light ambience */
+html.light .light-water-bg {
+  background-color: transparent !important;
+}
+
+/* Hide the dark linear-gradient overlay; replaced by body gradient */
+html.light .light-water-gradient-hide {
+  background: none !important;
+  opacity: 0 !important;
+}
+
+/* Main outer hero panel (replaces from-[#04162e] via-[#020d1c] to-[#010612] gradient) */
+html.light .light-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(236, 252, 255, 0.82) 50%,
+    rgba(224, 246, 255, 0.78) 100%
+  ) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border-color: rgba(14, 165, 233, 0.28) !important;
+  box-shadow:
+    0 20px 60px rgba(14, 116, 144, 0.12),
+    0 0 1px 1px rgba(255, 255, 255, 0.90),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+}
+
+/* Right panel / inner column (replaces bg-white/5) */
+html.light .light-panel-inner {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border-color: rgba(14, 165, 233, 0.22) !important;
+  box-shadow: 0 10px 35px rgba(14, 116, 144, 0.09) !important;
+}
+
+/* Banner strip (replaces bg-black/50) */
+html.light .light-banner {
+  background: rgba(248, 253, 255, 0.90) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom-color: rgba(14, 165, 233, 0.18) !important;
+}
+
+/* Sub-panel strip (replaces bg-black/60) */
+html.light .light-subpanel {
+  background: rgba(240, 250, 255, 0.88) !important;
+  border-bottom-color: rgba(14, 165, 233, 0.18) !important;
+}
+
+/* Footer strip (replaces bg-[#010915] and bg-[#010612]/90) */
+html.light .light-footer {
+  background: rgba(248, 253, 255, 0.94) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-top-color: rgba(14, 165, 233, 0.20) !important;
+  box-shadow: 0 -4px 20px rgba(14, 116, 144, 0.07) !important;
+}
+
+/* Hero GlassCard / depth zone card (replaces dark gradient bg) */
+html.light .light-glass-card {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-color: rgba(14, 165, 233, 0.26) !important;
+  box-shadow:
+    0 10px 35px rgba(14, 116, 144, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light .light-glass-card:hover {
+  box-shadow:
+    0 16px 48px rgba(14, 116, 144, 0.16),
+    0 0 24px rgba(14, 165, 233, 0.12),
+    inset 0 1px 0 #ffffff !important;
+}
+
+/* Depth zone gradient: via & to stops become translucent ice-blue */
+html.light .light-depth-via {
+  --tw-gradient-via: rgba(236, 250, 255, 0.90) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to, rgba(236, 250, 255, 0)) !important;
+}
+html.light .light-depth-to {
+  --tw-gradient-to: rgba(240, 249, 255, 0.95) !important;
+}
+
+/* Text corrections: force readable text on light panels */
+html.light .light-panel *,
+html.light .light-panel-inner *,
+html.light .light-glass-card * {
+  --tw-text-opacity: 1;
+}
+
+/* Inline-style dark gradients behind water scene — hidden in light */
+html.light .light-water-bg > div[style] {
+  opacity: 0 !important;
+}
+
+/* Fish, seaweed and caustics — visible but subtle */
+html.light .light-water-bg .fish-swim,
+html.light .light-water-bg canvas {
+  opacity: 0.18 !important;
+}
+
+/* ============================================================
+   DASHBOARD LIGHT MODE REPAIR SYSTEM
+============================================================ */
+
+/* ── Dark Mode Preserver: .dark-panel definition ── */
+.dark-panel {
+  background: linear-gradient(180deg, #04162e 0%, #020d1c 50%, #010612 100%);
+}
+
+/* ── 1. Left Depth Slider / Meter (Light Mode) ── */
+html.light .depth-meter-bg {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border-right: 1px solid rgba(14, 165, 233, 0.28) !important;
+  box-shadow: 4px 0 24px rgba(14, 116, 144, 0.08) !important;
+}
+
+html.light .depth-meter-label {
+  color: #475569 !important;
+}
+
+html.light .depth-meter-track {
+  background: rgba(14, 165, 233, 0.15) !important;
+}
+
+html.light .depth-meter-line {
+  box-shadow: 0 0 8px 1px rgba(14, 165, 233, 0.55) !important;
+}
+
+html.light .depth-meter-marker {
+  box-shadow: 0 0 16px 4px rgba(6, 182, 212, 0.65), 0 0 4px 1px #ffffff !important;
+}
+
+html.light .depth-meter-tick-label {
+  color: #64748b !important;
+}
+
+html.light .depth-meter-badge {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(14, 165, 233, 0.35) !important;
+  box-shadow: 0 2px 10px rgba(14, 116, 144, 0.12) !important;
+}
+
+html.light .depth-meter-unit {
+  color: #64748b !important;
+}
+
+/* ── 2. Action Buttons (Secondary Frosted Glass) ── */
+html.light .light-btn-secondary {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 16px rgba(14, 116, 144, 0.08), inset 0 1px 0 #ffffff !important;
+}
+
+html.light .light-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(14, 165, 233, 0.50) !important;
+  color: #0369a1 !important;
+  box-shadow: 0 8px 24px rgba(14, 116, 144, 0.14), 0 0 16px rgba(14, 165, 233, 0.18) !important;
+}
+
+/* ── 3. Metric Cards (Hero) ── */
+html.light .light-hero-metric {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border: 1px solid rgba(14, 165, 233, 0.30) !important;
+  box-shadow:
+    0 8px 25px rgba(14, 116, 144, 0.10),
+    0 0 1px 1px rgba(255, 255, 255, 0.90),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98) !important;
+}
+
+html.light .light-hero-metric:hover {
+  border-color: rgba(14, 165, 233, 0.50) !important;
+  box-shadow:
+    0 14px 35px rgba(14, 116, 144, 0.16),
+    0 0 20px rgba(14, 165, 233, 0.18),
+    inset 0 1px 0 #ffffff !important;
+}
+
+html.light .light-hero-metric .light-metric-val {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  font-weight: 900 !important;
+}
+
+html.light .light-hero-metric .light-metric-label {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+/* ── 4. General PrismCard in Light Mode ── */
+html.light .prism-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(240, 249, 255, 0.72) 100%) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(14, 165, 233, 0.28) !important;
+  box-shadow:
+    0 10px 32px -4px rgba(14, 116, 144, 0.10),
+    0 0 1px 1px rgba(255, 255, 255, 0.90),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 rgba(14, 165, 233, 0.10) !important;
+}
+
+html.light .prism-card:hover {
+  border-color: rgba(14, 165, 233, 0.45) !important;
+  box-shadow:
+    0 16px 40px -4px rgba(14, 116, 144, 0.15),
+    0 0 20px rgba(14, 165, 233, 0.14),
+    inset 0 1px 0 #ffffff !important;
+}
+
+html.light .prism-card-edge {
+  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.35), transparent) !important;
+}
+
+/* ── 5. Hero UI Surface Overrides ── */
+html.light .light-hero-status {
+  background: rgba(255, 255, 255, 0.80) !important;
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  color: #0369a1 !important;
+  box-shadow: 0 4px 14px rgba(14, 116, 144, 0.08) !important;
+}
+
+html.light .light-hero-title {
+  color: #0f172a !important;
+}
+
+html.light .light-hero-desc {
+  color: #475569 !important;
+}
+
+html.light .light-hero-span {
+  color: #0284c7 !important;
+}
+
+html.light .light-hero-dive {
+  color: #64748b !important;
+}
+
+html.light .light-suite-title {
+  color: #0f172a !important;
+}
+
+html.light .light-suite-subtitle {
+  color: #64748b !important;
+}
+
+html.light .light-suite-pills {
+  background: rgba(255, 255, 255, 0.70) !important;
+  border-color: rgba(14, 165, 233, 0.22) !important;
+}
+
+html.light .light-suite-pill-inactive {
+  color: #475569 !important;
+}
+
+html.light .light-suite-pill-inactive:hover {
+  color: #0f172a !important;
+  background: rgba(14, 165, 233, 0.12) !important;
+}
+
+/* ── 6. Continuous Underwater Transition (0m -> 1000m) ── */
+/* Zone 0: Surface (0m) — Sunlit surface waters */
+html.light .depth-zone-surface {
+  background: linear-gradient(180deg, #e8f7ff 0%, #def2fc 40%, #cdebf8 100%) !important;
+}
+
+html.light .depth-zone-surface .zone-title {
+  color: #0f172a !important;
+}
+
+html.light .depth-zone-surface .zone-desc {
+  color: #475569 !important;
+}
+
+html.light .depth-zone-surface .zone-fact-label {
+  color: #64748b !important;
+}
+
+html.light .depth-zone-surface .zone-fact-value {
+  color: #0f172a !important;
+}
+
+html.light .depth-zone-surface .zone-feature-desc {
+  color: #64748b !important;
+}
+
+html.light .depth-zone-surface .zone-depth-label {
+  color: #64748b !important;
+}
+
+/* Zone 1: Mixed Layer (30m) — Soft cyan fade */
+html.light .depth-zone-mixed {
+  background: linear-gradient(180deg, #cdebf8 0%, #b8e4f5 40%, #90d3ee 100%) !important;
+}
+
+html.light .depth-zone-mixed .zone-title {
+  color: #0f172a !important;
+}
+
+html.light .depth-zone-mixed .zone-desc {
+  color: #334155 !important;
+}
+
+html.light .depth-zone-mixed .zone-fact-label {
+  color: #475569 !important;
+}
+
+html.light .depth-zone-mixed .zone-fact-value {
+  color: #0f172a !important;
+}
+
+html.light .depth-zone-mixed .zone-feature-desc {
+  color: #475569 !important;
+}
+
+html.light .depth-zone-mixed .zone-depth-label {
+  color: #475569 !important;
+}
+
+/* Zone 2: Thermocline (100m) — Mid-ocean azure transition */
+html.light .depth-zone-thermocline {
+  background: linear-gradient(180deg, #90d3ee 0%, #5ebfe6 35%, #299ed3 70%, #0e78b2 100%) !important;
+}
+
+html.light .depth-zone-thermocline .zone-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 8px rgba(0, 40, 80, 0.4);
+}
+
+html.light .depth-zone-thermocline .zone-desc {
+  color: #e0f2fe !important;
+}
+
+html.light .depth-zone-thermocline .zone-fact-label {
+  color: #034870 !important;
+}
+
+html.light .depth-zone-thermocline .zone-fact-value {
+  color: #0f172a !important;
+}
+
+html.light .depth-zone-thermocline .zone-feature-desc {
+  color: #bae6fd !important;
+}
+
+html.light .depth-zone-thermocline .zone-depth-label {
+  color: #e0f2fe !important;
+}
+
+/* Zone 3: Mesopelagic (300m) — Twilight realm descending to deep navy */
+html.light .depth-zone-meso {
+  background: linear-gradient(180deg, #0e78b2 0%, #09598c 35%, #053b65 70%, #032442 100%) !important;
+}
+
+html.light .depth-zone-meso .zone-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 15, 35, 0.6);
+}
+
+html.light .depth-zone-meso .zone-desc {
+  color: #bae6fd !important;
+}
+
+html.light .depth-zone-meso .zone-feature-desc {
+  color: #7dd3fc !important;
+}
+
+html.light .depth-zone-meso .zone-depth-label {
+  color: #94a3b8 !important;
+}
+
+html.light .depth-zone-meso .prism-card {
+  background: linear-gradient(135deg, rgba(6, 32, 58, 0.72) 0%, rgba(3, 20, 38, 0.65) 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.28) !important;
+  box-shadow: 0 10px 32px rgba(0, 10, 25, 0.45) !important;
+}
+
+html.light .depth-zone-meso .prism-card .zone-fact-label {
+  color: #94a3b8 !important;
+}
+
+html.light .depth-zone-meso .prism-card .zone-fact-value {
+  color: #f8fafc !important;
+}
+
+/* Zone 4: Deep Ocean (700m–1000m) — Abyssal Midnight Ocean */
+html.light .depth-zone-deep {
+  background: linear-gradient(180deg, #032442 0%, #02172d 35%, #021020 70%, #010a15 100%) !important;
+}
+
+html.light .depth-zone-deep .zone-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 8, 20, 0.8);
+}
+
+html.light .depth-zone-deep .zone-desc {
+  color: #cbd5e1 !important;
+}
+
+html.light .depth-zone-deep .zone-feature-desc {
+  color: #94a3b8 !important;
+}
+
+html.light .depth-zone-deep .zone-depth-label {
+  color: #94a3b8 !important;
+}
+
+html.light .depth-zone-deep .prism-card {
+  background: linear-gradient(135deg, rgba(4, 20, 38, 0.78) 0%, rgba(2, 12, 24, 0.70) 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  box-shadow: 0 12px 36px rgba(0, 8, 20, 0.55), 0 0 25px rgba(6, 182, 212, 0.12) !important;
+}
+
+html.light .depth-zone-deep .prism-card .zone-fact-label {
+  color: #94a3b8 !important;
+}
+
+html.light .depth-zone-deep .prism-card .zone-fact-value {
+  color: #f8fafc !important;
+}
+
+/* ── 7. Platform Modules / 1000m Abyssal Section ── */
+html.light .platform-modules-section {
+  background: linear-gradient(180deg, #010a15 0%, #010812 50%, #01050e 100%) !important;
+  border-top: 1px solid rgba(14, 165, 233, 0.20) !important;
+}
+
+html.light .platform-modules-overlay {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+html.light .platform-modules-badge {
+  background: rgba(14, 165, 233, 0.15) !important;
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  color: #38bdf8 !important;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.20) !important;
+}
+
+html.light .platform-modules-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 14px rgba(0, 8, 20, 0.8) !important;
+}
+
+html.light .platform-modules-desc {
+  color: #94a3b8 !important;
+}
+
+html.light .platform-modules-section .prism-card {
+  background: linear-gradient(135deg, rgba(3, 18, 35, 0.78) 0%, rgba(1, 10, 20, 0.72) 100%) !important;
+  border: 1px solid rgba(56, 189, 248, 0.24) !important;
+  box-shadow: 0 12px 36px rgba(0, 5, 15, 0.60), 0 0 20px rgba(6, 182, 212, 0.10) !important;
+}
+
+html.light .platform-modules-section .prism-card:hover {
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 16px 44px rgba(0, 5, 15, 0.75), 0 0 30px rgba(6, 182, 212, 0.20) !important;
+}
+
+html.light .platform-modules-section .prism-card p {
+  color: #94a3b8 !important;
+}
+
+/* ── 8. 3D Simulation Panel (OceanHeroCanvas Container & HUD) ── */
+html.light .ocean-hero-canvas-frame {
+  border: 1px solid rgba(14, 165, 233, 0.35) !important;
+  box-shadow:
+    0 20px 60px rgba(14, 116, 144, 0.16),
+    0 0 30px rgba(6, 182, 212, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  border-radius: 1.5rem !important;
+}
+
+html.light .ocean-canvas-hud {
+  background: rgba(255, 255, 255, 0.86) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-color: rgba(14, 165, 233, 0.28) !important;
+  box-shadow: 0 8px 28px rgba(14, 116, 144, 0.10) !important;
+}
+
+html.light .ocean-canvas-hud p,
+html.light .ocean-canvas-hud span.text-white\/60,
+html.light .ocean-canvas-hud span.text-white\/70,
+html.light .ocean-canvas-hud span.text-white\/40 {
+  color: #475569 !important;
+}
+
+html.light .ocean-canvas-hud div.text-cyan-300,
+html.light .ocean-canvas-hud span.text-cyan-300 {
+  color: #0891b2 !important;
+}
+
+html.light .ocean-canvas-hud button:not([class*="from-cyan"]):not([class*="from-amber"]):not([class*="from-blue"]) {
+  color: #475569 !important;
+}
+
+html.light .ocean-canvas-hud button:not([class*="from-cyan"]):not([class*="from-amber"]):not([class*="from-blue"]):hover {
+  color: #0f172a !important;
+  background: rgba(14, 165, 233, 0.10) !important;
+}
+
+html.light .ocean-canvas-ctrl {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(14, 165, 233, 0.28) !important;
+  color: #475569 !important;
+  box-shadow: 0 4px 14px rgba(14, 116, 144, 0.08) !important;
+}
+
+html.light .ocean-canvas-ctrl:hover {
+  color: #0284c7 !important;
+  background: #ffffff !important;
+}
+
+html.light .ocean-canvas-hint {
+  color: #64748b !important;
+}
+
+/* ── 9. Operational Telemetry & GlowCard in Light Mode ── */
+html.light .light-glow-card {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-color: rgba(14, 165, 233, 0.28) !important;
+  box-shadow: 0 8px 30px rgba(14, 116, 144, 0.10) !important;
+}
+
+html.light .light-glow-card:hover {
+  border-color: rgba(14, 165, 233, 0.45) !important;
+  box-shadow: 0 14px 40px rgba(14, 116, 144, 0.16), 0 0 20px rgba(14, 165, 233, 0.15) !important;
+}
+
+html.light .light-glow-icon {
+  background: rgba(14, 165, 233, 0.10) !important;
+  border-color: rgba(14, 165, 233, 0.25) !important;
+}
+
+html.light .light-trend-badge {
+  background: rgba(255, 255, 255, 0.90) !important;
+  border-color: rgba(14, 165, 233, 0.22) !important;
+  box-shadow: 0 2px 8px rgba(14, 116, 144, 0.08) !important;
+}
+
+html.light .light-card-value {
+  color: #0f172a !important;
+}
+
+html.light .light-card-unit {
+  color: #64748b !important;
+}
+
+html.light .light-card-label {
+  color: #475569 !important;
+}
+
+html.light .light-card-sub {
+  color: #64748b !important;
+}
+
+
+
+/* ============================================================
+   UNIVERSAL 3D HOVER ZOOM & FOCUS PHYSICS
+============================================================ */
+
+/* 1. Universal 3D Buttons */
+button,
+.btn,
+.btn-3d,
+.btn-primary-cyan,
+.btn-glass,
+a.btn,
+[role="button"] {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.22s ease,
+              border-color 0.22s ease !important;
+  transform-origin: center center;
+  position: relative;
+}
+
+button:hover,
+.btn:hover,
+.btn-3d:hover,
+.btn-primary-cyan:hover,
+.btn-glass:hover,
+a.btn:hover,
+[role="button"]:hover {
+  transform: translateY(-4px) scale(1.058) perspective(600px) translateZ(12px) !important;
+  box-shadow: 0 14px 30px -4px rgba(6, 182, 212, 0.45),
+              0 6px 16px rgba(0, 0, 0, 0.55),
+              inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+  filter: brightness(1.12) !important;
+  z-index: 25 !important;
+}
+
+button:active,
+.btn:active,
+.btn-3d:active,
+.btn-primary-cyan:active,
+.btn-glass:active,
+[role="button"]:active {
+  transform: translateY(-1px) scale(0.98) !important;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3) !important;
+  filter: brightness(0.98) !important;
+}
+
+/* 2. Stat, Metric, KPI & Depth Cards (The exact card from user screenshot) */
+.stat-card-3d,
+.glow-card,
+.depth-card,
+.view-card,
+.prism-card,
+.metric-card,
+div[class*="GlowCard"] {
+  position: relative;
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.28s ease,
+              filter 0.28s ease !important;
+  transform-origin: center center;
+}
+
+.stat-card-3d:hover,
+.glow-card:hover,
+.depth-card:hover,
+.view-card:hover,
+.prism-card:hover,
+.metric-card:hover,
+div[class*="GlowCard"]:hover {
+  transform: translateY(-8px) scale(1.055) perspective(1000px) translateZ(18px) !important;
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.75),
+              0 0 32px var(--card-glow, rgba(6, 182, 212, 0.4)),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  border-color: var(--card-glow, rgba(6, 182, 212, 0.7)) !important;
+  filter: brightness(1.08) !important;
+  z-index: 35 !important;
+}
+
+/* 3. General Glass Panels & Interactive Cards */
+.glass-panel {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.25s ease !important;
+  transform-origin: center center;
+}
+
+.glass-panel:hover {
+  transform: translateY(-6px) scale(1.035) !important;
+  box-shadow: 0 22px 48px -10px rgba(0, 0, 0, 0.7),
+              0 0 28px rgba(6, 182, 212, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+  border-color: rgba(6, 182, 212, 0.5) !important;
+  z-index: 25 !important;
+}
+
+/* 4. Tab Items & Quick Filters */
+[role="tab"],
+.nav-tab-item {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease !important;
+}
+
+[role="tab"]:hover,
+.nav-tab-item:hover {
+  transform: translateY(-2px) scale(1.04) !important;
+}
+
+/* ==========================================================================
+   CRAZY CYCLONE RADAR & FORECASTING MAP ANIMATIONS (MoES / IMD)
+   ========================================================================== */
+
+@keyframes cyclone-spin-ccw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes radar-sweep-beam {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-eyewall-glow {
+  0%, 100% {
+    transform: scale(0.92);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.6), inset 0 0 8px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    transform: scale(1.14);
+    box-shadow: 0 0 26px rgba(239, 68, 68, 0.95), 0 0 45px rgba(220, 38, 38, 0.6), inset 0 0 14px rgba(255, 255, 255, 0.8);
+  }
+}
+
+@keyframes convective-lightning {
+  0%, 90%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  92% {
+    opacity: 1;
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 10px #38bdf8);
+  }
+  94% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+  96% {
+    opacity: 0.9;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 12px #facc15);
+  }
+  98% {
+    opacity: 0;
+  }
+}
+
+@keyframes dash-stream {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+@keyframes surge-wave-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes coastal-strike-alert {
+  0%, 100% {
+    background-color: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    background-color: rgba(239, 68, 68, 0.35);
+    border-color: rgba(239, 68, 68, 0.95);
+    box-shadow: 0 0 35px rgba(239, 68, 68, 0.7);
+  }
+}
+
+.animate-cyclone-vortex {
+  animation: cyclone-spin-ccw 24s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-cyclone-vortex-fast {
+  animation: cyclone-spin-ccw 16s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-cyclone-vortex-extreme {
+  animation: cyclone-spin-ccw 11s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep-beam 4s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-eyewall-pulse {
+  animation: pulse-eyewall-glow 1.8s ease-in-out infinite;
+}
+
+.animate-convective-zap {
+  animation: convective-lightning 3.2s ease-in-out infinite;
+}
+
+.animate-surge-ring {
+  animation: surge-wave-pulse 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+.animate-coastal-strike {
+  animation: coastal-strike-alert 1.5s ease-in-out infinite;
+}
+
+.animate-dash-flow {
+  animation: dash-stream 1.5s linear infinite;
+}
+
+/* Stable Map Card - Prevents 3D translate/scale from displacing Leaflet cursor hits */
+.radar-map-panel {
+  position: relative;
+  background: linear-gradient(135deg, rgba(2, 9, 23, 0.92) 0%, rgba(3, 14, 32, 0.85) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 25px rgba(6, 182, 212, 0.12);
+}
+
+@keyframes wave-swell {
+  0% { transform: translateX(0) translateZ(0) scaleY(1); }
+  50% { transform: translateX(-25%) translateZ(0) scaleY(1.22); }
+  100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
+}
+
+@keyframes wave-swell-secondary {
+  0% { transform: translateX(0) translateZ(0) scaleY(1); }
+  50% { transform: translateX(-35%) translateZ(0) scaleY(0.82); }
+  100% { transform: translateX(-70%) translateZ(0) scaleY(1); }
+}
+
+@keyframes needle-jitter {
+  0%, 100% { transform: rotate(var(--needle-deg, 0deg)); }
+  25% { transform: rotate(calc(var(--needle-deg, 0deg) + 2.5deg)); }
+  50% { transform: rotate(calc(var(--needle-deg, 0deg) - 1.8deg)); }
+  75% { transform: rotate(calc(var(--needle-deg, 0deg) + 1.2deg)); }
+}
+
+@keyframes radar-pulse-wave {
+  0% { transform: scale(0.1); opacity: 0.9; }
+  70% { opacity: 0.35; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+@keyframes red-alert-flash {
+  0%, 100% { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); }
+  50% { border-color: rgba(239, 68, 68, 0.95); box-shadow: 0 0 35px rgba(239, 68, 68, 0.65), inset 0 0 20px rgba(239, 68, 68, 0.2); }
+}
+
+@keyframes particle-stream-flow {
+  from { stroke-dashoffset: 64; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes lightning-branch-flash {
+  0%, 94%, 100% { opacity: 0; transform: scale(0.9); }
+  95% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 15px #38bdf8); }
+  97% { opacity: 0.3; }
+  98% { opacity: 1; filter: drop-shadow(0 0 20px #facc15); }
+}
+
+.animate-wave-swell {
+  animation: wave-swell 4s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+}
+
+.animate-wave-swell-fast {
+  animation: wave-swell 1.8s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+}
+
+.animate-wave-secondary {
+  animation: wave-swell-secondary 5s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+}
+
+.animate-needle {
+  animation: needle-jitter 1.2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-radar-pulse {
+  animation: radar-pulse-wave 3s ease-out infinite;
+}
+
+.animate-red-alert {
+  animation: red-alert-flash 1.6s ease-in-out infinite;
+}
+
+.animate-particle-stream {
+  animation: particle-stream-flow 1.2s linear infinite;
+}
+
+.animate-lightning-branch {
+  animation: lightning-branch-flash 3.5s ease-in-out infinite;
+}
+
+
+
+

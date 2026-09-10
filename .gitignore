@@ -1,0 +1,46 @@
+# Node / Vite
+node_modules/
+dist/
+dist-ssr/
+.vite/
+
+# Build outputs
+build/
+coverage/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Roo Code
+tools/roo-code/
+tools/roo-code/webview-ui/build/
+
+# Local AI development tools
+tools/.agents/
